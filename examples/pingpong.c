@@ -5,22 +5,22 @@
 
 #include <vireo.h>
 
-void pingpong(void);
+void pingpong(void*);
 
 void
-umain(void)
+umain(void*)
 {
-	int who = vireo_create(pingpong);
+	int who = vireo_create(pingpong, NULL);
 
 	// get the ball rolling
 	printf("send 0 from %x to %x\n", vireo_getid(), who);
 	vireo_send(who, 0);
 
-	pingpong();
+	pingpong(NULL);
 }
 
 void
-pingpong(void)
+pingpong(void*)
 {
 	int who;
 	while (1) {

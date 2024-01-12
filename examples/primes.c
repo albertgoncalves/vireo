@@ -4,7 +4,7 @@
 #include <vireo.h>
 
 void
-primeproc(void)
+primeproc(void*)
 {
 	int i, id, p;
 
@@ -13,7 +13,7 @@ primeproc(void)
 	printf("%d ", p);
 
 	// fork a right neighbor to continue the chain
-	id = vireo_create(primeproc);
+	id = vireo_create(primeproc, NULL);
 	if (id == -1)
 		exit(0);
 
@@ -26,11 +26,11 @@ primeproc(void)
 }
 
 void
-umain(void)
+umain(void*)
 {
 	int i, id;
 	// fork the first prime procss in the chain
-	id = vireo_create(primeproc);
+	id = vireo_create(primeproc, NULL);
 
 	// feed all the integers through
 	for (i = 2; ; i++)

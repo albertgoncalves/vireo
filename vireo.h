@@ -8,12 +8,12 @@
 #include <ucontext.h>
 
 // Start point of the green thread
-typedef void (*vireo_entry)(void);
+typedef void (*vireo_entry)(void* args);
 
 // Create (and mark as runnable) a new green thread. Will not be run
 // until at least the next call to env_yield(). Returns an identifier
 // for the green thread, or -1 if no new green thread can be created.
-int vireo_create(vireo_entry entry);
+int vireo_create(vireo_entry entry, void* args);
 
 // Yield to the next available green thread, possibly the current one
 void vireo_yield(void);
