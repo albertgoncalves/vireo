@@ -202,7 +202,7 @@ enable_preemption(void)
 
 	sigemptyset(&act.sa_mask);
 	sigaction(TIMERSIG, &act, NULL);
-	timer_create(CLOCK_PROCESS_CPUTIME_ID, &sigev, &timer);
+	timer_create(CLOCK_MONOTONIC, &sigev, &timer);
 }
 
 static void
