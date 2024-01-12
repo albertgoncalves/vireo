@@ -7,7 +7,7 @@
 #include <vireo.h>
 
 void
-child(void)
+child(void*)
 {
 	printf("I am the child.  Spinning...\n");
 	while (1)
@@ -15,12 +15,12 @@ child(void)
 }
 
 void
-umain(void)
+umain(void*)
 {
 	int env;
 
 	printf("I am the parent.  Forking the child...\n");
-	env = vireo_create(child);
+	env = vireo_create(child, NULL);
 
 	printf("I am the parent.  Running the child...\n");
 	vireo_yield();

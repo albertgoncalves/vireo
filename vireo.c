@@ -61,7 +61,7 @@ typedef struct Env {
 static Env envs[NENV];
 static int curenv;
 
-void umain(void); /* provided by user */
+void umain(void*); /* provided by user */
 
 /* Define a "successor context" for the purpose of calling env_exit */
 static ucontext_t exiter = {0};
@@ -88,7 +88,7 @@ make_stack(ucontext_t *ucp)
 }
 
 int
-vireo_create(vireo_entry entry)
+vireo_create(vireo_entry entry, void* args)
 {
 	// Find an available environment
 	int env;
@@ -107,7 +107,7 @@ vireo_create(vireo_entry entry)
 	getcontext(&envs[env].state);
 	make_stack(&envs[env].state);
 	envs[env].state.uc_link = &exiter;
-	makecontext(&envs[env].state, entry, 0);
+	makecontext(&envs[env].state, (void (*)(void))entry, 1, args);
 	// Creation worked. Yay.
 	return env;
 }
@@ -214,7 +214,7 @@ initialize_threads(vireo_entry new_main)
 	make_stack(&exiter);
 	makecontext(&exiter, vireo_exit, 0);
 
-	vireo_create(new_main);
+	vireo_create(new_main, NULL);
 	setcontext(&envs[curenv].state);
 }
 
