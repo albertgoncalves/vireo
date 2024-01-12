@@ -3,7 +3,7 @@
 #include <vireo.h>
 
 static void
-yield_thread(void*)
+yield_thread(void* _ __attribute__((unused)))
 {
 	int i;
 
@@ -17,7 +17,7 @@ yield_thread(void*)
 }
 
 void
-umain(void*)
+umain(void* _ __attribute__((unused)))
 {
 	int i;
 	for (i = 0; i < 3; i++) {

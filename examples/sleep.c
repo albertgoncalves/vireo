@@ -35,7 +35,7 @@ child(void* args)
 #define N 3
 
 void
-umain(void*)
+umain(void* _ __attribute__((unused)))
 {
     printf(" - parent thread yield\n");
     vireo_yield();

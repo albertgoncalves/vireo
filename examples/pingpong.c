@@ -5,10 +5,10 @@
 
 #include <vireo.h>
 
-void pingpong(void*);
+void pingpong(void* _ __attribute__((unused)));
 
 void
-umain(void*)
+umain(void* _ __attribute__((unused)))
 {
 	int who = vireo_create(pingpong, NULL);
 
@@ -20,7 +20,7 @@ umain(void*)
 }
 
 void
-pingpong(void*)
+pingpong(void* _ __attribute__((unused)))
 {
 	int who;
 	while (1) {
