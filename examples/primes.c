@@ -4,7 +4,7 @@
 #include <vireo.h>
 
 void
-primeproc(void*)
+primeproc(void* _ __attribute__((unused)))
 {
 	int i, id, p;
 
@@ -26,7 +26,7 @@ primeproc(void*)
 }
 
 void
-umain(void*)
+umain(void* _ __attribute__((unused)))
 {
 	int i, id;
 	// fork the first prime procss in the chain

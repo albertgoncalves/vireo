@@ -7,7 +7,7 @@
 #include <vireo.h>
 
 void
-child(void*)
+child(void* _ __attribute__((unused)))
 {
 	printf("I am the child.  Spinning...\n");
 	while (1)
@@ -15,7 +15,7 @@ child(void*)
 }
 
 void
-umain(void*)
+umain(void* _ __attribute__((unused)))
 {
 	int env;
 

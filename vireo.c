@@ -70,7 +70,7 @@ static ucontext_t exiter = {0};
 timer_t timer;
 const struct itimerspec ts = {
 	{0, 0},
-	{0, 100000000},
+	{0, 10000000},
 };
 
 static void
