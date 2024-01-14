@@ -17,16 +17,11 @@ sleep_(int seconds)
     } while (result != 0);
 }
 
-typedef struct {
-    int seconds;
-    int who;
-} Arg;
-
 void
 child(void* args)
 {
-    int seconds = ((Arg*)args)->seconds;
-    int who = ((Arg*)args)->who;
+    int seconds = *((int*)args);
+    int who = vireo_getid();
     printf("   - child [%d] thread sleeping for %d seconds\n", who, seconds);
     sleep_(seconds);
     printf("   - child [%d] thread has awoken\n", who);
@@ -38,13 +33,12 @@ void
 umain(void* _ __attribute__((unused)))
 {
     int envs[N];
-    Arg args[N];
+    int args[N];
 
     printf(" - creating child threads\n");
     for (int i = 0; i < N; ++i) {
         envs[i] = vireo_create(child, (void*)&args[i]);
-        args[i].seconds = N - i;
-        args[i].who = envs[i];
+        args[i] = N - i;
         vireo_yield();
     }
 
