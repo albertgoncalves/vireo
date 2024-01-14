@@ -37,9 +37,6 @@ child(void* args)
 void
 umain(void* _ __attribute__((unused)))
 {
-    printf(" - parent thread yield\n");
-    vireo_yield();
-
     int envs[N];
     Arg args[N];
 
@@ -48,6 +45,7 @@ umain(void* _ __attribute__((unused)))
         envs[i] = vireo_create(child, (void*)&args[i]);
         args[i].seconds = N - i;
         args[i].who = envs[i];
+        vireo_yield();
     }
 
     int seconds = N + 1;
